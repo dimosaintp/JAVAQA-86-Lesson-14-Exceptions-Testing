@@ -31,13 +31,55 @@ import ru.netology.repository.ProductRepository;
  */
 
 
+//public class Main {
+//    public static void main(String[] args) {
+//        ProductRepository repo = new ProductRepository();
+//
+//        try {
+//            repo.removeById(13);
+//            System.out.println("Всё в порядке!");
+//        } catch (NegativeArraySizeException error) {
+//            System.out.println("Возникла ошибка: " + error.getMessage());
+//        }
+//    }
+
+/**
+ * 14.2 Иерархия и выброс исключений.
+ * Чтобы создать исключение, надо отнаследовать от класса Throwable или одного из его наследников.
+ * <p>
+ * 1-й стоит класс ошибки Throwable.
+ * Самый главный наследник Throwable — Error. Java считает, что как то перехватывать и исцелять исключительные
+ * ситуации такого класса — не нужно. Если произошла ошибка типа Error, то лучше дать ей спокойно умереть.
+ * Чаще всего ошибки типа Error это ошибки самой IDE (Java машины), например, закончилась память и java больше
+ * не может выполнять программу. Любая ошибка Error или её потомки являются критическими ошибками и ловить их не нужно.
+ * <p>
+ * 2-й наследник класса Throwable — Exception.
+ * Exception делится на два главных вида ошибок:
+ * 1-й — RuntimeException и все его потомки. (Не проверяемые исключения).
+ * Можно писать Try, а можно не писать — ошибки компиляции не произойдёт.
+ * NegativeArraySizeException - как раз такой вид исключения.
+ * <p>
+ * 2-й — Exception и все его потомки НЕ по линии RuntimeException — проверяемые исключения.
+ * Такие исключения Java не пропустит, программа не завершится успешной компиляцией,
+ * если мы ничего с этой ошибкой не сделаем.
+ * Мы улучшим метод removeById(), добавив проверку на то, что элемент 13, переданный на удаление,
+ * является положительным числом.
+ *
+ * В классе ProductRepository метод removeById(int id) (Строка 50).
+ * Для старта процесса умирания программы нам необходимо:
+ * 1-е создать отчёт об ошибке. Обычный класс java. RuntimeException error = new RuntimeException
+ *             );
+ * 2-е заставить java начать умирать с этим отчётом.
+ *
+ *
+ */
+
 public class Main {
     public static void main(String[] args) {
         ProductRepository repo = new ProductRepository();
 
         try {
-            repo.removeById(13);
-            System.out.println("Всё в порядке!");
+            repo.removeById(-100);
         } catch (NegativeArraySizeException error) {
             System.out.println("Возникла ошибка: " + error.getMessage());
         }

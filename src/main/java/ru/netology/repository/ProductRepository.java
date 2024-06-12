@@ -48,6 +48,21 @@ public class ProductRepository {
     // Копируем в новый массив tmp содержимое items.
 
     public void removeById(int id) {
+        if (id < 0) {
+            RuntimeException error = new RuntimeException(
+                    "Возникла ошибка: " + "id не может быть отрицательным числом."
+            ); // Создаем отчёт об ошибке.
+            throw error; // Вызываем исключение, начинаем процесс умирания программы.
+        }
+
+//        // throws Exception - говорит о том, что здесь может возникнуть такое исключение.
+//        public void removeById(int id) throws Exception {
+//        if (id < 0) {
+//            throw new Exception(
+//                    "Возникла ошибка: " + "id не может быть отрицательным числом."
+//            );
+//        }
+
         PurchaseItem[] tmp = new PurchaseItem[items.length - 1];
         int copyToIndex = 0;
         for (PurchaseItem item : items) {

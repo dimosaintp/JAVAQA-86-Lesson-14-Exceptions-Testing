@@ -67,11 +67,30 @@ import ru.netology.repository.ProductRepository;
  *
  * В классе ProductRepository метод removeById(int id) (Строка 50).
  * Для старта процесса умирания программы нам необходимо:
- * 1-е создать отчёт об ошибке. Обычный класс java. RuntimeException error = new RuntimeException
- *             );
+ * 1-е создать отчёт об ошибке. Обычный класс java. RuntimeException error = new RuntimeException);
  * 2-е заставить java начать умирать с этим отчётом.
+ */
+
+//public class Main {
+//    public static void main(String[] args) {
+//        ProductRepository repo = new ProductRepository();
+//
+//        try {
+//            repo.removeById(-100);
+//        } catch (NegativeArraySizeException error) {
+//            System.out.println("Возникла ошибка: " + error.getMessage());
+//        }
+//    }
+
+/**
+ * 14.3 Свои классы исключений. Тестирование исключений.
+ * В действительности существует 2 принципиально разных вида ошибок:
+ * 1-й — ошибки программиста. Например, пытаемся удалить массив, которого не существует. Как правило,
+ * это не проверяемая ошибка.
+ * 2-й — ошибки, которые мы, как программисты предположить не можем — проверяемые исключения.
  *
- *
+ * Тестировщиков интересует — как нужный объект в нужных обстоятельствах умирает, так как надо.
+ * Для этого в Junit есть специальный assert — assertThrows.
  */
 
 public class Main {
@@ -84,4 +103,5 @@ public class Main {
             System.out.println("Возникла ошибка: " + error.getMessage());
         }
     }
+
 }

@@ -47,21 +47,42 @@ public class ProductRepository {
     // Иначе перед нами элемент, который мы хотим удалить и мы его не копируем.
     // Копируем в новый массив tmp содержимое items.
 
+    /* 14.1 Стектрейс. Перехват ошибок.
+
     public void removeById(int id) {
         if (id < 0) {
+
+            // Создаем отчёт об ошибке.
             RuntimeException error = new RuntimeException(
                     "Возникла ошибка: " + "id не может быть отрицательным числом."
-            ); // Создаем отчёт об ошибке.
-            throw error; // Вызываем исключение, начинаем процесс умирания программы.
+            );
+            // Вызываем исключение, начинаем процесс умирания программы.
+            throw error;
         }
 
-//        // throws Exception - говорит о том, что здесь может возникнуть такое исключение.
-//        public void removeById(int id) throws Exception {
-//        if (id < 0) {
-//            throw new Exception(
-//                    "Возникла ошибка: " + "id не может быть отрицательным числом."
-//            );
-//        }
+     */
+
+    /* 14.2 Иерархия и выброс исключений
+
+        // throws Exception - говорит о том, что здесь может возникнуть такое исключение.
+        public void removeById(int id) throws Exception {
+        if (id < 0) {
+            throw new Exception(
+                    "Возникла ошибка: " + "id не может быть отрицательным числом."
+            );
+        }
+
+     */
+
+    /* 14.2 Иерархия и выброс исключений */
+    // throws Exception здесь мы убираем, так как наш метод не выкидывает ошибок вида Exception.
+
+    public void removeById(int id) {
+        if (id < 0) {
+            throw new NegativeIdException(
+                    "Возникла ошибка: " + "id не может быть отрицательным числом."
+            );
+        }
 
         PurchaseItem[] tmp = new PurchaseItem[items.length - 1];
         int copyToIndex = 0;

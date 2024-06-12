@@ -35,4 +35,14 @@ public class ProductRepositoryTest {
         PurchaseItem[] actual = repo.getItems();
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test // Проверяем, NegativeIdException, просим удалить элемент -100.
+    public void testException() {
+        ProductRepository repo = new ProductRepository();
+        repo.save(item1);
+        repo.save(item2);
+        repo.save(item3);
+
+        Assertions.assertThrows(NegativeIdException.class, () -> repo.removeById(-100));
+    }
 }
